@@ -1,12 +1,13 @@
 import NextLink, { LinkProps } from "next/link";
-import { ReactNode, AnchorHTMLAttributes, forwardRef } from "react";
+import { AnchorHTMLAttributes, forwardRef } from "react";
 
-export type VividLinkProps = LinkProps &
-  AnchorHTMLAttributes<HTMLAnchorElement> & {
-    children: ReactNode;
-  };
+type CombinedProps = Omit<
+  AnchorHTMLAttributes<HTMLAnchorElement>,
+  keyof LinkProps
+> &
+  LinkProps;
 
-export const Link = forwardRef<HTMLAnchorElement, VividLinkProps>(
+export const Link = forwardRef<HTMLAnchorElement, CombinedProps>(
   ({ prefetch = false, children, ...props }, ref) => {
     return (
       <NextLink ref={ref} prefetch={prefetch} {...props}>
