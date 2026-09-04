@@ -1,0 +1,40 @@
+name: Publish to npm
+
+on:
+  release:
+    types: [released]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org/
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build package
+        run: pnpm build
+
+      - name: Check if version already exists on npm
+        run: |
+          VERSION=${{ github.event.release.tag_name }}
+          PKG="@vividwebau/next-link-no-autoprefetch"
+          EXISTS=$(npm view $PKG@$VERSION version || echo "none")
+          if [ "$EXISTS" != "none" ]; then
+            echo "Version $VERSION already exists on npm. Skipping publish."
+            exit 0
+          fi
+
+      - name: Publish to npm
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

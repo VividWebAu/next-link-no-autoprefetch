@@ -74,21 +74,6 @@ This rule triggers whenever next/link is imported directly.
 
 ---
 
-## Package Structure
-
-```
-src/
-  Link.tsx        # The controlled Link wrapper
-  index.ts        # Public exports
-
-eslint-plugin/
-  index.js        # Plugin entry
-  rules/
-    no-next-link.js
-```
-
----
-
 ## Versioning
 
 This package uses peer dependencies for next and react, ensuring compatibility across multiple Next.js versions without pinning or coupling to internal APIs.
