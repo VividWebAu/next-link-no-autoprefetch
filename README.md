@@ -1,101 +1,102 @@
 # @vividwebau/next-link-no-autoprefetch
 
-A lightweight, controlled wrapper around the Next.js `<Link>` component with **auto-prefetch disabled by default**. Designed for consistent behaviour across projects, this package also includes an ESLint rule that prevents accidental usage of `next/link`.
+A focused workspace for a single Next.js utility:
 
-This ensures predictable navigation performance, avoids unnecessary background prefetching, and keeps link behaviour fully **opt-in**.
-
----
-
-## Why this exists
-
-Next.js automatically prefetches linked routes, which can be helpful but often leads to:
-
-- unnecessary network activity
-- noisy performance profiles
-- unexpected background requests
-- inconsistent behaviour across projects
-
-This package provides a **stable, predictable alternative**:
-
-- `<Link>` defaults to `prefetch={false}`
-- Developers can still enable prefetch manually
-- ESLint warns if `next/link` is imported directly
+- A `<Link>` wrapper that disables autoprefetch by default
+- An optional ESLint rule to enforce explicit `prefetch` usage
+- A small Next.js test app to catch typing and runtime regressions before publish
 
 ---
 
-## Installation
+## **Packages**
+
+### **next-link-no-autoprefetch**
+
+- Next.js `<Link>` wrapper with `prefetch={false}` by default
+- TypeScript-first
+- Located at: `packages/next-link-no-autoprefetch`
+
+### **eslint-plugin-next-link-no-autoprefetch**
+
+- ESLint rule enforcing explicit `prefetch` usage
+- Helps teams avoid accidental implicit prefetching
+- Located at: `packages/eslint-plugin-next-link-no-autoprefetch`
+
+---
+
+## **Test App**
+
+### **vividweb-test-app**
+
+- Minimal Next.js app used to validate:
+  - prop passthrough (`className`, `style`, etc.)
+  - `prefetch` behaviour
+  - typing under strict TypeScript
+- Located at: `apps/test`
+
+---
+
+## **Structure**
+
+```text
+/
+  packages/
+    next-link-no-autoprefetch/
+    eslint-plugin-next-link-no-autoprefetch/
+
+  apps/
+    test/
+
+  .github/
+  pnpm-workspace.yaml
+  tsconfig.base.json
+  pnpm-lock.yaml
+  README.md
+```
+
+---
+
+## **Development**
+
+**Install:**
 
 ```bash
-pnpm add @vividwebau/next-link-no-autoprefetch
+pnpm install
+```
+
+**Build package:**
+
+```bash
+pnpm --filter next-link-no-autoprefetch build
+```
+
+**Typecheck package:**
+
+```bash
+pnpm --filter next-link-no-autoprefetch typecheck
+```
+
+**Run test app:**
+
+```bash
+pnpm --filter vividweb-test-app dev
 ```
 
 ---
 
-## Usage (`prefetch={false}` by default)
+## **Publishing**
 
-```tsx
-import { Link } from "@vividwebau/next-link-no-autoprefetch";
+Publishing is automated via GitHub Releases:
 
-export default function Example() {
-  return <Link href="/about">About Us</Link>;
-}
-```
+- Create a release with a semver tag
+- CI runs build, typecheck, lint, and test app
+- If the version does not exist on npm, it is published
 
-## Opt-in prefetching
-
-```tsx
-<Link href="/dashboard" prefetch>
-  Go to dashboard
-</Link>
-```
+This keeps releases retryable and avoids broken versions.
 
 ---
 
-## ESLint Rule
+## **Linting**
 
-To prevent accidental usage of next/link, enable the included ESLint plugin:
-
-```js
-// .eslintrc.cjs or eslint.config.js
-module.exports = {
-  plugins: ["@vividwebau/next-link-no-autoprefetch"],
-  rules: {
-    "@vividwebau/next-link-no-autoprefetch/no-next-link": "warn",
-  },
-};
-```
-
-This rule triggers whenever next/link is imported directly.
-
-### Using with Biome
-
-Biome does not currently support custom lint rules, but you can still enforce
-usage of this component by restricting imports of `next/link`.
-
-Add the following to your `biome.json`:
-
-```json
-{
-  "linter": {
-    "rules": {
-      "noRestrictedImports": {
-        "level": "error",
-        "options": {
-          "paths": [
-            {
-              "name": "next/link",
-              "message": "Use @vividwebau/next-link-no-autoprefetch instead."
-            }
-          ]
-        }
-      }
-    }
-  }
-}
-
----
-
-## Versioning
-
-This package uses peer dependencies for next and react, ensuring compatibility across multiple Next.js versions without pinning or coupling to internal APIs.
-```
+- **Biome**: recommended for consuming projects
+- **ESLint**: supported via `eslint-plugin-next-link-no-autoprefetch` for teams using ESLint

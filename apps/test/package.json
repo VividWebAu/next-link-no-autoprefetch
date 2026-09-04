@@ -1,0 +1,16 @@
+{
+  "name": "next-link-no-autoprefetch-test-app",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "16.0.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "@vividwebau/next-link-no-autoprefetch": "workspace:*"
+  }
+}

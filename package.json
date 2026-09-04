@@ -1,24 +1,21 @@
 {
-  "name": "@vividwebau/next-link-no-autoprefetch",
-  "version": "0.1.4",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist",
-    "eslint-plugin"
-  ],
+  "name": "next-link-no-autoprefetch-workspace",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Workspace for @vividwebau/next-link-no-autoprefetch and its ESLint plugin.",
   "scripts": {
-    "build": "tsc",
-    "lint": "eslint ."
-  },
-  "peerDependencies": {
-    "next": ">=14",
-    "react": ">=18"
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test",
+    "dev:test-app": "pnpm --filter vividweb-test-app dev",
+    "build:test-app": "pnpm --filter vividweb-test-app build",
+    "build:lib": "pnpm --filter next-link-no-autoprefetch build"
   },
   "devDependencies": {
-    "typescript": "^5.0.0",
-    "eslint": "^9.0.0",
-    "@types/react": "^18.0.0",
-    "@types/node": "^20.0.0"
+    "typescript": "6.0.2",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.3",
+    "@types/node": "^20.11.30"
   }
 }

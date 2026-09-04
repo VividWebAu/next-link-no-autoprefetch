@@ -1,19 +1,31 @@
 {
     "compilerOptions": {
+        "ignoreDeprecations": "6.0",
+        "baseUrl": ".",
         "target": "ES2020",
-        "module": "Node16",
-        "moduleResolution": "node16",
-        "jsx": "react-jsx",
-        "declaration": true,
-        "rootDir": "src",
-        "outDir": "dist",
+        "useDefineForClassFields": true,
+        "lib": [
+            "ES2020",
+            "DOM",
+            "DOM.Iterable"
+        ],
+        "module": "ESNext",
+        "skipLibCheck": true,
         "strict": true,
-        "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
-        "skipLibCheck": true
-    },
-    "include": [
-        "src",
-        "eslint-plugin"
-    ]
+        "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
+        "resolveJsonModule": true,
+        "moduleResolution": "bundler",
+        "incremental": true,
+        "composite": true,
+        "declaration": true,
+        "declarationMap": true,
+        "sourceMap": true,
+        "paths": {
+            "@vividwebau/next-link-no-autoprefetch/*": [
+                "packages/next-link-no-autoprefetch/src/*"
+            ]
+        }
+    }
 }

@@ -26,10 +26,20 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build package
+      - name: Typecheck all packages
+        run: pnpm typecheck
+
+      - name: Lint all packages
+        run: pnpm lint || true
+
+      - name: Build everything
         run: pnpm build
 
+      - name: Build test app
+        run: pnpm build:test-app
+
       - name: Check if version already exists on npm
+        working-directory: packages/next-link-no-autoprefetch
         run: |
           VERSION=${{ github.event.release.tag_name }}
           PKG="@vividwebau/next-link-no-autoprefetch"
@@ -40,6 +50,7 @@ jobs:
           fi
 
       - name: Publish to npm
+        working-directory: packages/next-link-no-autoprefetch
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
