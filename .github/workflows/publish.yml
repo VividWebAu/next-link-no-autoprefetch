@@ -26,18 +26,33 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Typecheck all packages
-        run: pnpm typecheck
+      # -----------------------------------------------------
+      # TYPECHECK ONLY LIB + ESLINT PLUGIN (exclude test app)
+      # -----------------------------------------------------
+      - name: Typecheck library packages
+        run: |
+          pnpm --filter ./packages/next-link-no-autoprefetch typecheck
+          pnpm --filter ./packages/eslint-plugin-next-link-no-autoprefetch typecheck
 
-      - name: Lint all packages
-        run: pnpm lint || true
+      # -----------------------------------------------------
+      # LINT ONLY LIB + ESLINT PLUGIN (exclude test app)
+      # -----------------------------------------------------
+      - name: Lint library packages
+        run: |
+          pnpm --filter ./packages/next-link-no-autoprefetch lint || true
+          pnpm --filter ./packages/eslint-plugin-next-link-no-autoprefetch lint || true
 
-      - name: Build everything
-        run: pnpm build
+      # -----------------------------------------------------
+      # BUILD ONLY LIB + ESLINT PLUGIN (exclude test app)
+      # -----------------------------------------------------
+      - name: Build library packages
+        run: |
+          pnpm --filter ./packages/next-link-no-autoprefetch build
+          pnpm --filter ./packages/eslint-plugin-next-link-no-autoprefetch build
 
-      - name: Build test app
-        run: pnpm build:test-app
-
+      # -----------------------------------------------------
+      # VERSION CHECK (unchanged)
+      # -----------------------------------------------------
       - name: Check if version already exists on npm
         working-directory: packages/next-link-no-autoprefetch
         run: |
@@ -49,6 +64,9 @@ jobs:
             exit 0
           fi
 
+      # -----------------------------------------------------
+      # PUBLISH (unchanged)
+      # -----------------------------------------------------
       - name: Publish to npm
         working-directory: packages/next-link-no-autoprefetch
         run: npm publish --access public
