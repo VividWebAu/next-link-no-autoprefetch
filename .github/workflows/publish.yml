@@ -19,10 +19,10 @@ jobs:
           registry-url: https://registry.npmjs.org/
 
       - name: Install dependencies
-        run: pnpm install
+        run: npm ci
 
       - name: Build package
-        run: pnpm build
+        run: npm run build
 
       - name: Check if version already exists on npm
         run: |
