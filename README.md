@@ -29,3 +29,66 @@ This package provides a **stable, predictable alternative**:
 ```bash
 pnpm add @vividwebau/next-link-no-autoprefetch
 ```
+
+---
+
+## Usage (`prefetch={false}` by default)
+
+```tsx
+import { Link } from "@vividwebau/next-link-no-autoprefetch";
+
+export default function Example() {
+  return (
+    <Link href="/about">
+      About Us
+    </Link>
+  );
+}
+```
+
+## Opt-in prefetching
+
+```tsx
+<Link href="/dashboard" prefetch>
+  Go to dashboard
+</Link>
+```
+
+---
+
+## ESLint Rule
+
+To prevent accidental usage of next/link, enable the included ESLint plugin:
+
+```js
+// .eslintrc.cjs or eslint.config.js
+module.exports = {
+  plugins: ["@vividwebau/next-link-no-autoprefetch"],
+  rules: {
+    "@vividwebau/next-link-no-autoprefetch/no-next-link": "warn"
+  }
+};
+```
+
+This rule triggers whenever next/link is imported directly.
+
+---
+
+## Package Structure
+
+```
+src/
+  Link.tsx        # The controlled Link wrapper
+  index.ts        # Public exports
+
+eslint-plugin/
+  index.js        # Plugin entry
+  rules/
+    no-next-link.js
+```
+
+---
+
+## Versioning
+
+This package uses peer dependencies for next and react, ensuring compatibility across multiple Next.js versions without pinning or coupling to internal APIs.
