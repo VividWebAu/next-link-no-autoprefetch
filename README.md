@@ -20,7 +20,6 @@ This package provides a **stable, predictable alternative**:
 - `<Link>` defaults to `prefetch={false}`
 - Developers can still enable prefetch manually
 - ESLint warns if `next/link` is imported directly
-- Behaviour is consistent across all Vivid Web apps
 
 ---
 
@@ -38,11 +37,7 @@ pnpm add @vividwebau/next-link-no-autoprefetch
 import { Link } from "@vividwebau/next-link-no-autoprefetch";
 
 export default function Example() {
-  return (
-    <Link href="/about">
-      About Us
-    </Link>
-  );
+  return <Link href="/about">About Us</Link>;
 }
 ```
 
@@ -65,15 +60,42 @@ To prevent accidental usage of next/link, enable the included ESLint plugin:
 module.exports = {
   plugins: ["@vividwebau/next-link-no-autoprefetch"],
   rules: {
-    "@vividwebau/next-link-no-autoprefetch/no-next-link": "warn"
-  }
+    "@vividwebau/next-link-no-autoprefetch/no-next-link": "warn",
+  },
 };
 ```
 
 This rule triggers whenever next/link is imported directly.
+
+### Using with Biome
+
+Biome does not currently support custom lint rules, but you can still enforce
+usage of this component by restricting imports of `next/link`.
+
+Add the following to your `biome.json`:
+
+```json
+{
+  "linter": {
+    "rules": {
+      "noRestrictedImports": {
+        "level": "error",
+        "options": {
+          "paths": [
+            {
+              "name": "next/link",
+              "message": "Use @vividwebau/next-link-no-autoprefetch instead."
+            }
+          ]
+        }
+      }
+    }
+  }
+}
 
 ---
 
 ## Versioning
 
 This package uses peer dependencies for next and react, ensuring compatibility across multiple Next.js versions without pinning or coupling to internal APIs.
+```

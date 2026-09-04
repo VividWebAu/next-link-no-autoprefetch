@@ -1,5 +1,14 @@
 import NextLink, { LinkProps } from "next/link";
+import { ReactNode } from "react";
 
-export function Link({ prefetch = false, ...props }: LinkProps) {
-  return <NextLink prefetch={prefetch} {...props} />;
+export type NewLinkProps = LinkProps & {
+  children: ReactNode;
+};
+
+export function Link({ prefetch = false, children, ...props }: NewLinkProps) {
+  return (
+    <NextLink prefetch={prefetch} {...props}>
+      {children}
+    </NextLink>
+  );
 }
