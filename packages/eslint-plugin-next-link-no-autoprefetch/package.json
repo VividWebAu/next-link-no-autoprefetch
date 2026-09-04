@@ -1,0 +1,30 @@
+{
+  "name": "eslint-plugin-next-link-no-autoprefetch",
+  "version": "0.1.0",
+  "private": false,
+  "description": "ESLint rule preventing imports from next/link in favour of @vividwebau/next-link-no-autoprefetch.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit",
+    "lint": "echo \"No lint step for plugin\"",
+    "test": "echo \"No tests yet\""
+  },
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "nextjs",
+    "link",
+    "prefetch"
+  ],
+  "peerDependencies": {
+    "eslint": "^8.0.0"
+  },
+  "devDependencies": {
+    "@types/eslint": "^8.0.0"
+  }
+}
