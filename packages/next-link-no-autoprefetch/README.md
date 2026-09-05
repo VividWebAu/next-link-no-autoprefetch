@@ -77,16 +77,16 @@ Add this to your `biome.json`:
 ```json
 {
   "linter": {
+    "enabled": true,
     "rules": {
-      "noRestrictedImports": {
-        "level": "error",
-        "options": {
-          "paths": [
-            {
-              "name": "next/link",
-              "message": "Use @vividwebau/next-link-no-autoprefetch instead."
+      "style": {
+        "noRestrictedImports": {
+          "level": "error",
+          "options": {
+            "paths": {
+              "next/link": "Use @vividwebau/next-link-no-autoprefetch instead"
             }
-          ]
+          }
         }
       }
     }
