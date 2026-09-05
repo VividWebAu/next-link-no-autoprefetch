@@ -1,4 +1,6 @@
-import { Link } from "@vividwebau/next-link-no-autoprefetch";
+import Link from "@vividwebau/next-link-no-autoprefetch";
+import OnclickLink from "../components/OnclickLink";
+import RefLink from "../components/RefLink";
 
 export default function Page() {
   return (
@@ -26,6 +28,11 @@ export default function Page() {
         prefetch={false}
       >
         Styled Link
+      </Link>
+
+      {/* Link with hover prefetch */}
+      <Link href="/hover-prefetch" prefetch="hover">
+        Hover Prefetch Link
       </Link>
 
       {/* Link with target + rel */}
@@ -64,13 +71,7 @@ export default function Page() {
       </Link>
 
       {/* Link with onClick handler */}
-      <Link
-        href="/onclick"
-        onClick={() => console.log("Link clicked")}
-        prefetch={false}
-      >
-        Link With onClick
-      </Link>
+      <OnclickLink />
 
       {/* Link with nested children */}
       <Link href="/nested" prefetch={false}>
@@ -104,15 +105,7 @@ export default function Page() {
       </Link>
 
       {/* Link with ref forwarding */}
-      <Link
-        href="/ref-test"
-        ref={(el) => {
-          console.log("Ref forwarded:", el);
-        }}
-        prefetch={false}
-      >
-        Ref Forwarding Link
-      </Link>
+      <RefLink />
 
       {/* Link styled to look disabled */}
       <Link

@@ -24,8 +24,8 @@ importers:
   apps/test:
     dependencies:
       '@vividwebau/next-link-no-autoprefetch':
-        specifier: workspace:*
-        version: link:../../packages/next-link-no-autoprefetch
+        specifier: link:../../packages/next-link-no-autoprefetch/dist
+        version: link:../../packages/next-link-no-autoprefetch/dist
       next:
         specifier: 16.0.0
         version: 16.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)

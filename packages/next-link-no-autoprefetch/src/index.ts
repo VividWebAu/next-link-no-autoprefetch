@@ -1,3 +1,2 @@
-export { default } from "./Link.js";
-export * from "./Link.js";
-export type { LinkProps } from "next/link";
+export { default } from "./Link.client";
+export type { LinkProps } from "./Link.client";
