@@ -147,3 +147,10 @@ The test app ensures:
 - correct typing under strict TS
 - correct runtime behaviour
 - no regressions before publish
+
+---
+
+## License
+
+MIT © Vivid Web  
+This package wraps Next.js's `next/link`, which is also licensed under MIT.

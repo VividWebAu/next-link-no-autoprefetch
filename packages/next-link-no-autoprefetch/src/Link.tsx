@@ -7,7 +7,20 @@ type CombinedProps = Omit<
 > &
   LinkProps;
 
-export const Link = forwardRef<HTMLAnchorElement, CombinedProps>(
+/**
+ * A wrapper around `next/link` that disables automatic prefetching by default.
+ *
+ * This component preserves all behaviour of Next.js App Router links:
+ * - typed `href`
+ * - `replace`, `scroll`, `shallow`
+ * - `prefetch` (boolean only)
+ * - anchor attributes (`target`, `rel`, `aria-*`, etc.)
+ *
+ * Differences from Next.js:
+ * - `prefetch` defaults to `false`
+ * - `prefetch="auto"` is not supported (Page Router only)
+ */
+const Link = forwardRef<HTMLAnchorElement, CombinedProps>(
   ({ prefetch = false, children, ...props }, ref) => {
     return (
       <NextLink ref={ref} prefetch={prefetch} {...props}>
@@ -18,3 +31,4 @@ export const Link = forwardRef<HTMLAnchorElement, CombinedProps>(
 );
 
 Link.displayName = "Link";
+export default Link;

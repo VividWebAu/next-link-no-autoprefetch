@@ -1,6 +1,7 @@
 {
   "name": "eslint-plugin-next-link-no-autoprefetch",
   "version": "0.1.0",
+  "license": "MIT",
   "private": false,
   "description": "ESLint rule preventing imports from next/link in favour of @vividwebau/next-link-no-autoprefetch.",
   "main": "dist/index.js",
